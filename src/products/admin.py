@@ -1,18 +1,21 @@
 from django.contrib import admin
-from .models import ProductModel, ProviderProductModel
+from products.models import ProductModel, ProviderProductModel
 
 
 class ProviderProductInstanceInLine(admin.TabularInline):
     model = ProviderProductModel
+    min_num = 0
     extra = 0
 
 
-@admin.register(ProductModel)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category_name')
-    list_filter = ('name', 'category')
+    list_display = ('category_name',)
+    list_filter = ('category',)
 
 
-@admin.register(ProviderProductModel)
 class ProviderProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'code', 'price', 'product')
+
+
+admin.site.register(ProductModel, ProductAdmin)
+admin.site.register(ProviderProductModel, ProviderProductAdmin)

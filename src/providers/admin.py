@@ -1,10 +1,12 @@
 from django.contrib import admin
-from .models import ProviderModel
+from providers.models import ProviderModel
 from products.admin import ProviderProductInstanceInLine
 
 
-@admin.register(ProviderModel)
 class ProviderAdmin(admin.ModelAdmin):
-    inlines = [ProviderProductInstanceInLine]
-    list_display = ('name', 'display_products_count')
+    inlines = (ProviderProductInstanceInLine,)
+    list_display = ('name',)
     list_filter = ('name',)
+
+
+admin.site.register(ProviderModel, ProviderAdmin)
