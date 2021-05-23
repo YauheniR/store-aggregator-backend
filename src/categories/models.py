@@ -1,4 +1,3 @@
-from django.core import validators
 from django.db import models
 from products.models import ProductModel
 
@@ -20,7 +19,7 @@ class CategoryModel(models.Model):
 class ProviderCategoryModel(models.Model):
     provider = models.ForeignKey('providers.ProviderModel', on_delete=models.CASCADE)
     category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE)
-    url = models.CharField(max_length=500, validators=[validators.URLValidator])
+    url = models.URLField()
 
     class Meta:
         verbose_name = 'Provider Category'
