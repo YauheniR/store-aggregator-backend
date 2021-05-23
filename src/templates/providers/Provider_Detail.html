@@ -1,0 +1,7 @@
+{% block body %}
+    <ul>
+        <li>{{ provider.id }}</li>
+        <li>{{ provider.created }}</li>
+        <a href="{% url 'ProvidersList' %}">Назад</a>
+    </ul>
+{% endblock %}

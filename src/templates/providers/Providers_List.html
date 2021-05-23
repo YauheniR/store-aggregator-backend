@@ -1,0 +1,7 @@
+{% block body %}
+    <ul>
+        {% for provider in providers_list %}
+            <li><a href="{% url 'ProviderDetail' provider.id %}">{{ provider.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -40,9 +40,16 @@ INSTALLED_APPS = [
     'providers.apps.ProvidersConfig',
     'categories.apps.CategoriesConfig',
     'products.apps.ProductsConfig',
+    'rest_framework',
     'adminsortable2',
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

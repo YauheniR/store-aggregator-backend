@@ -6,6 +6,8 @@ from categories.models import ProviderCategoryModel
 from categories.models import CategoryModel
 from adminsortable2.admin import SortableAdminMixin
 
+from providers.models import ProviderModel
+
 
 class ProviderCategoryInstanceInLine(admin.TabularInline):
     model = ProviderCategoryModel
