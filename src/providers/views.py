@@ -1,16 +1,35 @@
-from django.views import generic
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
+from rest_framework import generics, filters, status
 from providers.models import ProviderModel
+from core.exceptions import (NotFoundSerializer,
+                             BadRequestSerializer,
+                             RequestTimeoutSerializer,
+                             MethodNotAllowedSerializer)
+from providers.serializers import (ProviderListSerializer,
+                                   ProviderDetailSerializer,
+                                   )
 
 
-class ProvidersView(generic.ListView):
-    template_name = 'providers/Providers_List.html'
-    context_object_name = 'providers_list'
+@extend_schema(
+    responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+               status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+               status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+               status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
 
-    def get_queryset(self):
-        return ProviderModel.objects.all()
+               }
+)
+@extend_schema()
+class ProvidersView(generics.ListCreateAPIView):
+    queryset = ProviderModel.objects.all()
+    serializer_class = ProviderListSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['name']
+    ordering_fields = ['created']
 
 
-class ProviderView(generic.DetailView):
-    model = ProviderModel
-    template_name = 'providers/Provider_Detail.html'
-    context_object_name = 'provider'
+@extend_schema()
+class ProviderView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProviderModel.objects.all()
+    serializer_class = ProviderDetailSerializer
+    lookup_field = 'id'

@@ -41,15 +41,23 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'products.apps.ProductsConfig',
     'rest_framework',
+    'django_filters',
     'adminsortable2',
-
+    'drf_spectacular',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'store_agregator_django',
+    'DESCRIPTION': 'Test Description',
+    'VERSION': '1.0.0',
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
