@@ -4,5 +4,5 @@ from providers import views
 
 urlpatterns = [
     path('', views.ProvidersView.as_view()),
-    path('<int:id>/', views.ProviderView.as_view()),
+    path('<int:pk>/', views.ProviderView.as_view()),
 ]

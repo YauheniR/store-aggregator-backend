@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'providers.apps.ProvidersConfig',
-    'categories.apps.CategoriesConfig',
-    'products.apps.ProductsConfig',
     'rest_framework',
     'django_filters',
     'adminsortable2',
     'drf_spectacular',
+    'providers.apps.ProvidersConfig',
+    'categories.apps.CategoriesConfig',
+    'products.apps.ProductsConfig',
 ]
 
 REST_FRAMEWORK = {
