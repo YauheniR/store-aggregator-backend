@@ -4,14 +4,12 @@ from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularRedocView
 from drf_spectacular.views import SpectacularSwaggerView
 
-extra_patterns = [
-    path('providers/', include('providers.urls')),
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-]
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(extra_patterns)),
+    path('api/', include([
+        path('providers/', include('providers.urls')),
+        path('schema/', SpectacularAPIView.as_view(), name='schema'),
+        path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+        path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    ])),
 ]

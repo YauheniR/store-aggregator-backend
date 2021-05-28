@@ -16,5 +16,14 @@ class RequestTimeoutSerializer(serializers.Serializer):
 class MethodNotAllowedSerializer(serializers.Serializer):
     detail = serializers.CharField()
 
+
 class OkSerializer(serializers.Serializer):
+    detail = serializers.CharField()
+
+
+class CreatedSerializer(serializers.Serializer):
+    detail = serializers.CharField()
+
+
+class NoContentSerializer(serializers.Serializer):
     detail = serializers.CharField()
