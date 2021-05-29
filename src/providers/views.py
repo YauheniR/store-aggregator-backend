@@ -18,18 +18,24 @@ from providers.serializers import ProviderDetailSerializer
 
 
 @extend_schema_view(
-    get=extend_schema(responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
-                                 status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
-                                 status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
-                                 status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
-                                 status.HTTP_200_OK: OkSerializer,
-                                 }),
-    post=extend_schema(responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
-                                  status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
-                                  status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
-                                  status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
-                                  status.HTTP_201_CREATED: CreatedSerializer,
-                                  })
+    get=extend_schema(
+        responses={
+            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+            status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
+            status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+        }
+    ),
+    post=extend_schema(
+        responses={
+            status.HTTP_201_CREATED: CreatedSerializer,
+            status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+            status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
+            status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+        }
+    )
 )
 class ProvidersView(generics.ListCreateAPIView):
     queryset = ProviderModel.objects.all()
@@ -40,30 +46,42 @@ class ProvidersView(generics.ListCreateAPIView):
 
 
 @extend_schema_view(
-    get=extend_schema(responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
-                                 status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
-                                 status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
-                                 status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
-                                 status.HTTP_200_OK: OkSerializer,
-                                 }),
-    put=extend_schema(responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
-                                 status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
-                                 status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
-                                 status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
-                                 status.HTTP_200_OK: OkSerializer,
-                                 }),
-    patch=extend_schema(responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
-                                   status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
-                                   status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
-                                   status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
-                                   status.HTTP_200_OK: OkSerializer,
-                                   }),
-    delete=extend_schema(responses={status.HTTP_404_NOT_FOUND: NotFoundSerializer,
-                                    status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
-                                    status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
-                                    status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
-                                    status.HTTP_204_NO_CONTENT: NoContentSerializer,
-                                    })
+    get=extend_schema(
+        responses={
+            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+            status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
+            status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+        }
+    ),
+    put=extend_schema(
+        responses={
+            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+            status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
+            status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+        }
+    ),
+    patch=extend_schema(
+        responses={
+            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+            status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
+            status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+        }
+    ),
+    delete=extend_schema(
+        responses={
+            status.HTTP_204_NO_CONTENT: NoContentSerializer,
+            status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_404_NOT_FOUND: NotFoundSerializer,
+            status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
+            status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
+        }
+    )
 )
 class ProviderView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProviderModel.objects.all()
