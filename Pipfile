@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-admin-sortable2 = "*"
+djangorestframework = "*"
+django-filter = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 

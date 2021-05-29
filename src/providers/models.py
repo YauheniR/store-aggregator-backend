@@ -10,10 +10,5 @@ class ProviderModel(models.Model):
         verbose_name = 'Provider'
         verbose_name_plural = 'Providers'
 
-    def display_products_count(self):
-        return ', '.join(str(ProviderProductModel.objects.filter(provide=self).count()))
-
-    display_products_count.short_description = 'number products'
-
     def __str__(self):
         return self.name
