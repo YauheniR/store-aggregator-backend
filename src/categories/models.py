@@ -18,7 +18,7 @@ class CategoryModel(models.Model):
 
 class ProviderCategoryModel(models.Model):
     provider = models.ForeignKey('providers.ProviderModel', on_delete=models.CASCADE)
-    category = models.ForeignKey('categories.CategoryModel', related_name='categories_providers', on_delete=models.CASCADE,)
+    category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE,)
     url = models.URLField()
 
     class Meta:

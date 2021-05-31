@@ -27,3 +27,12 @@ class CreatedSerializer(serializers.Serializer):
 
 class NoContentSerializer(serializers.Serializer):
     detail = serializers.CharField()
+
+
+class ProviderCategoryUpdateSerializer(serializers.Serializer):
+    detail = serializers.CharField()
+
+
+class CategoryDetailSerializer(serializers.Serializer):
+    detail = serializers.CharField()
+

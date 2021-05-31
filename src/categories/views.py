@@ -5,11 +5,10 @@ from rest_framework import generics
 from rest_framework import status
 from categories.models import ProviderCategoryModel
 from categories.models import CategoryModel
-from categories.serializers import ProviderCategoryCreateSerializer
-from categories.serializers import ProviderCategoryUpdateSerializer
-from categories.serializers import CategoryListSerializer
-from categories.serializers import CategoryDetailSerializer
-from core.exceptions import MethodNotAllowedSerializer
+from categories.serializers import ProviderCategorySerializer
+from categories.serializers import CategoriesSerializer
+from categories.serializers import CategorySerializer
+from core.exceptions import MethodNotAllowedSerializer, ProviderCategoryUpdateSerializer, CategoryDetailSerializer
 from core.exceptions import NotFoundSerializer
 from core.exceptions import BadRequestSerializer
 from core.exceptions import NoContentSerializer
@@ -41,7 +40,7 @@ from core.filters import CategoryFilter
 )
 class CategoriesView(generics.ListCreateAPIView):
     queryset = CategoryModel.objects.all()
-    serializer_class = CategoryListSerializer
+    serializer_class = CategoriesSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CategoryFilter
 
@@ -49,7 +48,7 @@ class CategoriesView(generics.ListCreateAPIView):
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: CategoryDetailSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -58,7 +57,7 @@ class CategoriesView(generics.ListCreateAPIView):
     ),
     put=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: CategoryDetailSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -67,7 +66,7 @@ class CategoriesView(generics.ListCreateAPIView):
     ),
     patch=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: CategoryDetailSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -86,7 +85,7 @@ class CategoriesView(generics.ListCreateAPIView):
 )
 class CategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CategoryModel.objects.all()
-    serializer_class = CategoryDetailSerializer
+    serializer_class = CategorySerializer
     lookup_field = 'id'
 
 
@@ -101,15 +100,15 @@ class CategoryView(generics.RetrieveUpdateDestroyAPIView):
         }
     ),
 )
-class ProvidersCategriesToCategoryView(generics.CreateAPIView):
+class ProvidersCategriesView(generics.CreateAPIView):
     queryset = ProviderCategoryModel.objects.all()
-    serializer_class = ProviderCategoryCreateSerializer
+    serializer_class = ProviderCategorySerializer
 
 
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderCategoryUpdateSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -118,7 +117,7 @@ class ProvidersCategriesToCategoryView(generics.CreateAPIView):
     ),
     put=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderCategoryUpdateSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -127,7 +126,7 @@ class ProvidersCategriesToCategoryView(generics.CreateAPIView):
     ),
     patch=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderCategoryUpdateSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -144,7 +143,7 @@ class ProvidersCategriesToCategoryView(generics.CreateAPIView):
         }
     )
 )
-class ProviderCategoryToCategoryView(generics.RetrieveUpdateDestroyAPIView):
+class ProviderCategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProviderCategoryModel.objects.all()
-    serializer_class = ProviderCategoryUpdateSerializer
+    serializer_class = ProviderCategorySerializer
     lookup_field = 'id'
