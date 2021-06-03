@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework import filters
 from core.filters import ProviderFilter
+from core.paginations import CustomPagination
 from providers.models import ProviderModel
 from core.exceptions import NotFoundSerializer
 from core.exceptions import CreatedSerializer
@@ -42,6 +43,8 @@ class ProvidersView(generics.ListCreateAPIView):
     serializer_class = ProviderListSerializer
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
     filterset_class = ProviderFilter
+    pagination_class = CustomPagination
+    ordering = 'id'
     ordering_fields = ('created',)
 
 

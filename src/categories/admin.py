@@ -6,8 +6,6 @@ from categories.models import ProviderCategoryModel
 from categories.models import CategoryModel
 from adminsortable2.admin import SortableAdminMixin
 
-from providers.models import ProviderModel
-
 
 class ProviderCategoryInstanceInLine(admin.TabularInline):
     model = ProviderCategoryModel
@@ -32,7 +30,7 @@ class CategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     def display_button(self, obj: CategoryModel) -> format_html:
         return format_html('<a class="button" href="{}?category__id__exact=%s">Button</a>' % (obj.id,),
                            reverse('admin:%s_%s_changelist' % (
-                           ProductModel._meta.app_label, ProductModel._meta.model_name), ))
+                               ProductModel._meta.app_label, ProductModel._meta.model_name), ))
 
     display_button.short_description = 'This Products'
     display_button.allow_tags = True
