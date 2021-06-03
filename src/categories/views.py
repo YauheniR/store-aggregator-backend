@@ -16,7 +16,7 @@ from core.exceptions import RequestTimeoutSerializer
 from core.exceptions import OkSerializer
 from core.exceptions import CreatedSerializer
 from core.filters import CategoryFilter
-from core.paginations import StandardResultsSetPagination
+from core.paginations import CustomPagination
 
 
 @extend_schema_view(
@@ -44,7 +44,7 @@ class CategoriesView(generics.ListCreateAPIView):
     serializer_class = CategoriesSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CategoryFilter
-    pagination_class = StandardResultsSetPagination
+    pagination_class = CustomPagination
     ordering = 'id'
 
 

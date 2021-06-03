@@ -12,7 +12,7 @@ from core.exceptions import RequestTimeoutSerializer
 from core.exceptions import CreatedSerializer
 from core.exceptions import NoContentSerializer
 from core.filters import ProviderProductsFilter
-from core.paginations import StandardResultsSetPagination
+from core.paginations import CustomPagination
 from products.models import ProductModel
 from products.models import ProviderProductModel
 from products.serializers import ProductsSerializer
@@ -43,7 +43,7 @@ from products.serializers import ProviderProductSerializer
 class ProductsView(generics.ListCreateAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductsSerializer
-    pagination_class = StandardResultsSetPagination
+    pagination_class = CustomPagination
     ordering = 'id'
 
 
@@ -118,7 +118,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
     filter_class = ProviderProductsFilter
     search_fields = ('name',)
     ordering_fields = ('name', 'created',)
-    pagination_class = StandardResultsSetPagination
+    pagination_class = CustomPagination
     ordering = 'id'
 
 
