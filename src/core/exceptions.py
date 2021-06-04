@@ -36,3 +36,6 @@ class ProviderCategoryUpdateSerializer(serializers.Serializer):
 class CategoryDetailSerializer(serializers.Serializer):
     detail = serializers.CharField()
 
+
+class ForbiddenSerrializer(serializers.Serializer):
+    detail = serializers.CharField()

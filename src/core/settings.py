@@ -36,13 +36,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
     'adminsortable2',
     'drf_spectacular',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'providers.apps.ProvidersConfig',
     'categories.apps.CategoriesConfig',
     'products.apps.ProductsConfig',
+    'users.apps.UsersConfig',
 ]
+
+SITE_ID = 1
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -116,6 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+AUTH_USER_MODEL = 'users.UserModel'
 
 LANGUAGE_CODE = 'ru-ru'
 
