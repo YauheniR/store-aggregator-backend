@@ -4,6 +4,8 @@ from drf_spectacular.utils import extend_schema_view
 from rest_framework import generics
 from rest_framework import filters
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from core.exceptions import ForbiddenSerrializer
 from core.exceptions import OkSerializer
 from core.exceptions import BadRequestSerializer
 from core.exceptions import NotFoundSerializer
@@ -34,6 +36,7 @@ from products.serializers import ProviderProductSerializer
         responses={
             status.HTTP_201_CREATED: CreatedSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -41,6 +44,7 @@ from products.serializers import ProviderProductSerializer
     )
 )
 class ProductsView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProductModel.objects.all()
     serializer_class = ProductsSerializer
     pagination_class = CustomPagination
@@ -61,6 +65,7 @@ class ProductsView(generics.ListCreateAPIView):
         responses={
             status.HTTP_200_OK: OkSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -70,6 +75,7 @@ class ProductsView(generics.ListCreateAPIView):
         responses={
             status.HTTP_200_OK: OkSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -79,6 +85,7 @@ class ProductsView(generics.ListCreateAPIView):
         responses={
             status.HTTP_204_NO_CONTENT: NoContentSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -86,6 +93,7 @@ class ProductsView(generics.ListCreateAPIView):
     )
 )
 class ProductView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProductModel.objects.all()
     serializer_class = ProductsSerializer
     lookup_field = 'id'
@@ -105,6 +113,7 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
         responses={
             status.HTTP_201_CREATED: CreatedSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -112,6 +121,7 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
     )
 )
 class ProviderProductsView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderProductModel.objects.all()
     serializer_class = ProviderProductsSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
@@ -136,6 +146,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
         responses={
             status.HTTP_200_OK: OkSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -145,6 +156,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
         responses={
             status.HTTP_200_OK: OkSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -154,6 +166,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
         responses={
             status.HTTP_204_NO_CONTENT: NoContentSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
+            status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
@@ -161,6 +174,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
     )
 )
 class ProviderProductView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderProductModel.objects.all()
     serializer_class = ProviderProductSerializer
     lookup_field = 'id'

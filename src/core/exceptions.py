@@ -1,38 +1,45 @@
 from rest_framework import serializers
 
 
-class NotFoundSerializer(serializers.Serializer):
+class AbstractSerializer(serializers.Serializer):
     detail = serializers.CharField()
 
 
-class BadRequestSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class NotFoundSerializer(AbstractSerializer):
+    pass
 
 
-class RequestTimeoutSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class BadRequestSerializer(AbstractSerializer):
+    pass
 
 
-class MethodNotAllowedSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class RequestTimeoutSerializer(AbstractSerializer):
+    pass
 
 
-class OkSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class MethodNotAllowedSerializer(AbstractSerializer):
+    pass
 
 
-class CreatedSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class OkSerializer(AbstractSerializer):
+    pass
 
 
-class NoContentSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class CreatedSerializer(AbstractSerializer):
+    pass
 
 
-class ProviderCategoryUpdateSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class NoContentSerializer(AbstractSerializer):
+    pass
 
 
-class CategoryDetailSerializer(serializers.Serializer):
-    detail = serializers.CharField()
+class ProviderCategoryUpdateSerializer(AbstractSerializer):
+    pass
 
+
+class CategoryDetailSerializer(AbstractSerializer):
+    pass
+
+
+class ForbiddenSerrializer(AbstractSerializer):
+    pass

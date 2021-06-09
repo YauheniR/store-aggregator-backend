@@ -1,4 +1,3 @@
-from typing import Dict
 from rest_framework import serializers
 from products.models import ProductModel
 from products.models import ProviderProductModel

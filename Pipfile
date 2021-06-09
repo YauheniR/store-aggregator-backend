@@ -9,6 +9,8 @@ django-admin-sortable2 = "*"
 djangorestframework = "*"
 django-filter = "*"
 drf-spectacular = "*"
+django-rest-auth = "*"
+django-allauth = "*"
 
 [dev-packages]
 
