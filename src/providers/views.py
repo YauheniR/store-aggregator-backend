@@ -5,14 +5,13 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from core.filters import ProviderFilter
 from core.paginations import CustomPagination
+from providers.filters import ProviderFilter
 from providers.models import ProviderModel
 from core.exceptions import ForbiddenSerrializer
 from core.exceptions import NotFoundSerializer
 from core.exceptions import CreatedSerializer
 from core.exceptions import NoContentSerializer
-from core.exceptions import OkSerializer
 from core.exceptions import BadRequestSerializer
 from core.exceptions import RequestTimeoutSerializer
 from core.exceptions import MethodNotAllowedSerializer
@@ -23,7 +22,7 @@ from providers.serializers import ProviderDetailSerializer
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderListSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -55,7 +54,7 @@ class ProvidersView(generics.ListCreateAPIView):
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderDetailSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -64,7 +63,7 @@ class ProvidersView(generics.ListCreateAPIView):
     ),
     put=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderDetailSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
@@ -74,7 +73,7 @@ class ProvidersView(generics.ListCreateAPIView):
     ),
     patch=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderDetailSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,

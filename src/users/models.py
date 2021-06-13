@@ -1,12 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from users.Constants import Language
 
 
 class UserModel(AbstractUser):
     LANGUAGE_CHOICES = (
-        ('RU', 'Русский'),
-        ('EN', 'English'),
-        ('BY', 'Беларускі'),
+        ('RU', Language.RU),
+        ('EN', Language.EN),
+        ('BY', Language.BY),
     )
 
     city = models.CharField(max_length=25, blank=True, null=True,)

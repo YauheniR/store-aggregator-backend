@@ -6,15 +6,14 @@ from rest_framework import filters
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from core.exceptions import ForbiddenSerrializer
-from core.exceptions import OkSerializer
 from core.exceptions import BadRequestSerializer
 from core.exceptions import NotFoundSerializer
 from core.exceptions import MethodNotAllowedSerializer
 from core.exceptions import RequestTimeoutSerializer
 from core.exceptions import CreatedSerializer
 from core.exceptions import NoContentSerializer
-from core.filters import ProviderProductsFilter
 from core.paginations import CustomPagination
+from products.filters import ProviderProductsFilter
 from products.models import ProductModel
 from products.models import ProviderProductModel
 from products.serializers import ProductsSerializer
@@ -25,7 +24,7 @@ from products.serializers import ProviderProductSerializer
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProductsSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -54,7 +53,7 @@ class ProductsView(generics.ListCreateAPIView):
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProductsSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -63,7 +62,7 @@ class ProductsView(generics.ListCreateAPIView):
     ),
     put=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProductsSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
@@ -73,7 +72,7 @@ class ProductsView(generics.ListCreateAPIView):
     ),
     patch=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProductsSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
@@ -102,7 +101,7 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderProductsSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -135,7 +134,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
 @extend_schema_view(
     get=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderProductSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
@@ -144,7 +143,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
     ),
     put=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderProductSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,
@@ -154,7 +153,7 @@ class ProviderProductsView(generics.ListCreateAPIView):
     ),
     patch=extend_schema(
         responses={
-            status.HTTP_200_OK: OkSerializer,
+            status.HTTP_200_OK: ProviderProductSerializer,
             status.HTTP_400_BAD_REQUEST: BadRequestSerializer,
             status.HTTP_403_FORBIDDEN: ForbiddenSerrializer,
             status.HTTP_404_NOT_FOUND: NotFoundSerializer,

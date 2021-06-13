@@ -7,18 +7,18 @@ class CategoryModel(models.Model):
     created = models.DateField(auto_now_add=True)
     position = models.PositiveIntegerField(default=0, blank=False, null=False)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         ordering = ('position', 'name',)
 
-    def __str__(self):
-        return self.name
-
 
 class ProviderCategoryModel(models.Model):
     provider = models.ForeignKey('providers.ProviderModel', on_delete=models.CASCADE)
-    category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE,)
+    category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE, )
     url = models.URLField()
 
     class Meta:

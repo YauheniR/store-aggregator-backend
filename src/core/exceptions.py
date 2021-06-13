@@ -21,10 +21,6 @@ class MethodNotAllowedSerializer(AbstractSerializer):
     pass
 
 
-class OkSerializer(AbstractSerializer):
-    pass
-
-
 class CreatedSerializer(AbstractSerializer):
     pass
 
