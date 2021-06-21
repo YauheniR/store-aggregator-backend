@@ -27,15 +27,9 @@ class CategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     def display_products_count(self, obj: CategoryModel) -> int:
         return ProductModel.objects.filter(category=obj).count()
 
-    def display_button(self, obj: CategoryModel) -> format_html:
-        return format_html(
-            '<a class="button" href="{}?category__id__exact=%s">Button</a>' % (obj.id,),
-            reverse(
-                'admin:%s_%s_changelist' % (ProductModel._meta.app_label,
-                                            ProductModel._meta.model_name,
-                                            ),
-            ),
-        )
+    def display_button(self, obj: CategoryModel) -> format_html: return format_html(
+        '<a class="button" href="{}?category__id__exact=%s">Button</a>' % (obj.id,),
+        reverse('admin:%s_%s_changelist' % (ProductModel._meta.app_label, ProductModel._meta.model_name,), ), )
 
     display_button.short_description = 'This Products'
     display_button.allow_tags = True

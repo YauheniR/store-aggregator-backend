@@ -7,7 +7,7 @@ class CategoryModel(models.Model):
     created = models.DateField(auto_now_add=True)
     position = models.PositiveIntegerField(default=0, blank=False, null=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
     class Meta:
@@ -18,7 +18,7 @@ class CategoryModel(models.Model):
 
 class ProviderCategoryModel(models.Model):
     provider = models.ForeignKey('providers.ProviderModel', on_delete=models.CASCADE)
-    category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE, )
+    category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE,)
     url = models.URLField()
 
     class Meta:
