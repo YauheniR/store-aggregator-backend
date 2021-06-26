@@ -96,6 +96,7 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductsSerializer
     lookup_field = 'id'
+    lookup_url_kwarg = 'product_id'
 
 
 @extend_schema_view(
@@ -122,7 +123,7 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
 class ProviderProductsView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderProductModel.objects.all()
-    serializer_class = ProviderProductsSerializer
+    serializer_class = ProviderProductSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_class = ProviderProductsFilter
     search_fields = ('name',)
@@ -177,3 +178,4 @@ class ProviderProductView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProviderProductModel.objects.all()
     serializer_class = ProviderProductSerializer
     lookup_field = 'id'
+    lookup_url_kwarg = 'provider_product_id'

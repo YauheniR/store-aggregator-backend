@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from products.models import ProductModel
 from products.models import ProviderProductModel
-from products.tasks import find_provider_product_id
+from products.tasks import find_id_from_provider_product
 
 
 class ProductsSerializer(serializers.ModelSerializer):
@@ -15,13 +15,13 @@ class ProviderProductsSerializer(serializers.ModelSerializer):
         model = ProviderProductModel
         fields = '__all__'
 
-    def create(self, validated_data: dict) -> serializers.ModelSerializer:
-        instance = super().create(validated_data)
-        find_provider_product_id.delay(instance.id)
-        return instance
-
 
 class ProviderProductSerializer(serializers.ModelSerializer):
+    def create(self, validated_data: dict) -> ProviderProductModel:
+        instance = super().create(validated_data)
+        find_id_from_provider_product.delay(instance.id)
+        return instance
+
     class Meta:
         model = ProviderProductModel
         fields = '__all__'

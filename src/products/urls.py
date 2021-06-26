@@ -6,14 +6,14 @@ from products.views import ProductView
 from products.views import ProductsView
 
 urlpatterns = [
-    path('', ProductsView.as_view()),
-    path('<int:id>/', include(
+    path('', ProductsView.as_view(), name='product-list'),
+    path('<int:product_id>/', include(
         [
-            path('', ProductView.as_view()),
+            path('', ProductView.as_view(), name='product-detail'),
             path('providers/', include(
                 [
-                    path('', ProviderProductsView.as_view()),
-                    path('<int:id>/', ProviderProductView.as_view()),
+                    path('', ProviderProductsView.as_view(), name='providers-product-list'),
+                    path('<int:provider_product_id>/', ProviderProductView.as_view(), name='providers-product-detail'),
                 ]
             ))
         ])),

@@ -17,7 +17,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    categories_providers = ProviderCategorySerializer(source='providercategorymodel_set', many=True)
+    categories_providers = ProviderCategorySerializer(source='providercategorymodel_set', many=True, read_only=True)
 
     class Meta:
         model = CategoryModel

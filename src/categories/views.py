@@ -97,6 +97,7 @@ class CategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializer
     lookup_field = 'id'
+    lookup_url_kwarg = 'category_id'
 
 
 @extend_schema_view(
@@ -163,3 +164,8 @@ class ProviderCategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProviderCategoryModel.objects.all()
     serializer_class = ProviderCategorySerializer
     lookup_field = 'id'
+    lookup_url_kwarg = 'provider_category_id'
+
+    def get(self, request, *args, **kwargs):
+        self.queryset = ProviderCategoryModel.objects.filter(category_id=kwargs.get('category_id'))
+        return self.retrieve(request, *args, **kwargs)
