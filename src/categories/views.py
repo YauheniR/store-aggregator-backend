@@ -166,6 +166,5 @@ class ProviderCategoryView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
     lookup_url_kwarg = 'provider_category_id'
 
-    def get(self, request, *args, **kwargs):
-        self.queryset = ProviderCategoryModel.objects.filter(category_id=kwargs.get('category_id'))
-        return self.retrieve(request, *args, **kwargs)
+    def get_queryset(self):
+        return super(ProviderCategoryView, self).get_queryset().filter(category_id=self.kwargs.get('category_id'))
