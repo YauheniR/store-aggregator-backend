@@ -12,6 +12,7 @@ drf-spectacular = "*"
 django-rest-auth = "*"
 django-allauth = "*"
 celery = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
