@@ -9,20 +9,26 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
+import environ
 
-from pathlib import Path
-
+root = environ.Path(__file__) - 3
+env = environ.Env(DEBUG=(bool, False), )
+environ.Env.read_env(env_file=os.path.join(os.path.join(root.root, 'src/' '.env.example')))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l(46ldlf9e#vyls0kp1l2aruoe%)alhuek01o%h_-5sfr3$pcr'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
+
+ADMIN_USER_NAME = env('ADMIN_USER_NAME')
+ADMIN_USER_PASSWORD = env('ADMIN_USER_PASSWORD')
 
 ALLOWED_HOSTS = []
 
@@ -35,16 +41,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+
     'django_filters',
     'adminsortable2',
     'drf_spectacular',
-    'rest_auth',
-    'django.contrib.sites',
+
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
+
     'providers.apps.ProvidersConfig',
     'categories.apps.CategoriesConfig',
     'products.apps.ProductsConfig',
@@ -105,11 +115,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_database',
-        'USER': 'django_user',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
 
@@ -155,4 +165,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = env('BROKER_URL')
