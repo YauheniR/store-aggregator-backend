@@ -1,5 +1,7 @@
 # Первый старт
 
+**Русский** | [English](../en/first_start.md)
+
 Вы можете запустить проект **store-aggregator-backend** локально используя **Pipenv**.
 
 ### Зависимости

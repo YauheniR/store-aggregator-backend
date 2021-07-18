@@ -1,5 +1,7 @@
 # Swagger
 
+**Русский** | [English](../en/swagger.md)
+
 В приложение настроен [Swagger](https://github.com/tfranzel/drf-spectacular#readme), 
 он доступен только в режиме разработки (**DEBUG=true**).
 

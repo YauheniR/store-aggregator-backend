@@ -1,11 +1,13 @@
 # store-aggregator-backend
 
-Программа собирает данные с сайтов о товарах и ценах.
-Приложение написана на [Django](https://www.djangoproject.com/) 3.2.5.
+[Русский](docs/ru/README.md) | **English**
 
-**Содержание**
+The program collects data from websites about products and prices.
+The application is written in [Django](https://www.djangoproject.com/) 3.2.5.
 
-- [Переменные среды](docs/ru/enviroment.md)
-- [Первый старт](docs/ru/first_start.md)
-- [Swagger](docs/ru/swagger.md)
-- [Тесты](docs/ru/tests.md)
+**Contents**
+
+- [Environment variables](docs/en/enviroment.md)
+- [First start](docs/en/first_start.md)
+- [Swagger](docs/en/swagger.md)
+- [Tests](docs/en/tests.md)
