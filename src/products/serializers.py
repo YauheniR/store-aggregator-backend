@@ -7,13 +7,13 @@ from products.tasks import find_id_from_provider_product
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductModel
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ProviderProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProviderProductModel
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ProviderProductSerializer(serializers.ModelSerializer):
@@ -24,4 +24,4 @@ class ProviderProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProviderProductModel
-        fields = '__all__'
+        fields = "__all__"

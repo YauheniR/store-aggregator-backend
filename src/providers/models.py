@@ -10,5 +10,5 @@ class ProviderModel(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Provider'
-        verbose_name_plural = 'Providers'
+        verbose_name = "Provider"
+        verbose_name_plural = "Providers"

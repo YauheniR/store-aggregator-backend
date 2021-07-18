@@ -9,12 +9,12 @@ class ProviderProductInstanceInLine(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('category_name',)
-    list_filter = ('category',)
+    list_display = ("category_name",)
+    list_filter = ("category",)
 
 
 class ProviderProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'code', 'price', 'product')
+    list_display = ("name", "code", "price", "product")
 
 
 admin.site.register(ProductModel, ProductAdmin)

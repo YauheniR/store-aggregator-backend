@@ -3,6 +3,6 @@ from categories.models import ProviderCategoryModel
 
 
 @shared_task
-def get_provider_category() -> int:
+def get_provider_category_count() -> int:
     providers_category = ProviderCategoryModel.objects.all()
     return providers_category.count()

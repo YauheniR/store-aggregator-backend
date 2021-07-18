@@ -7,13 +7,22 @@ import users.constants
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_auto_20210604_1937'),
+        ("users", "0002_auto_20210604_1937"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='usermodel',
-            name='language',
-            field=models.CharField(blank=True, choices=[('RU', users.constants.LanguageEnum['RU']), ('EN', users.constants.LanguageEnum['EN']), ('BY', users.constants.LanguageEnum['BY'])], max_length=20, null=True),
+            model_name="usermodel",
+            name="language",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("RU", users.constants.LanguageEnum["RU"]),
+                    ("EN", users.constants.LanguageEnum["EN"]),
+                    ("BY", users.constants.LanguageEnum["BY"]),
+                ],
+                max_length=20,
+                null=True,
+            ),
         ),
     ]

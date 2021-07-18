@@ -11,16 +11,22 @@ class CategoryModel(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
-        ordering = ('position', 'name',)
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+        ordering = (
+            "position",
+            "name",
+        )
 
 
 class ProviderCategoryModel(models.Model):
-    provider = models.ForeignKey('providers.ProviderModel', on_delete=models.CASCADE)
-    category = models.ForeignKey('categories.CategoryModel', on_delete=models.CASCADE,)
+    provider = models.ForeignKey("providers.ProviderModel", on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        "categories.CategoryModel",
+        on_delete=models.CASCADE,
+    )
     url = models.URLField()
 
     class Meta:
-        verbose_name = 'Provider Category'
-        verbose_name_plural = 'Provider Categories'
+        verbose_name = "Provider Category"
+        verbose_name_plural = "Provider Categories"

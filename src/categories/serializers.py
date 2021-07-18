@@ -6,19 +6,25 @@ from categories.models import ProviderCategoryModel
 class ProviderCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ProviderCategoryModel
-        fields = ('url', 'provider', 'category')
-        read_only_field = ('provider', 'category')
+        fields = ("url", "provider", "category")
+        read_only_field = ("provider", "category")
 
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryModel
-        exclude = ('position',)
+        exclude = ("position",)
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    categories_providers = ProviderCategorySerializer(source='providercategorymodel_set', many=True, read_only=True)
+    categories_providers = ProviderCategorySerializer(
+        source="providercategorymodel_set", many=True, read_only=True
+    )
 
     class Meta:
         model = CategoryModel
-        fields = ('name', 'created', 'categories_providers',)
+        fields = (
+            "name",
+            "created",
+            "categories_providers",
+        )

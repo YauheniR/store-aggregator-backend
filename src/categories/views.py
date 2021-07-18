@@ -39,7 +39,7 @@ from core.paginations import CustomPagination
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class CategoriesView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -48,7 +48,7 @@ class CategoriesView(generics.ListCreateAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CategoryFilter
     pagination_class = CustomPagination
-    ordering = 'id'
+    ordering = "id"
 
 
 @extend_schema_view(
@@ -90,14 +90,14 @@ class CategoriesView(generics.ListCreateAPIView):
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class CategoryView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializer
-    lookup_field = 'id'
-    lookup_url_kwarg = 'category_id'
+    lookup_field = "id"
+    lookup_url_kwarg = "category_id"
 
 
 @extend_schema_view(
@@ -157,14 +157,18 @@ class ProvidersCategriesView(generics.CreateAPIView):
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProviderCategoryView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderCategoryModel.objects.all()
     serializer_class = ProviderCategorySerializer
-    lookup_field = 'id'
-    lookup_url_kwarg = 'provider_category_id'
+    lookup_field = "id"
+    lookup_url_kwarg = "provider_category_id"
 
     def get_queryset(self):
-        return super(ProviderCategoryView, self).get_queryset().filter(category_id=self.kwargs.get('category_id'))
+        return (
+            super(ProviderCategoryView, self)
+            .get_queryset()
+            .filter(category_id=self.kwargs.get("category_id"))
+        )

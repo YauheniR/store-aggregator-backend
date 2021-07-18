@@ -38,17 +38,20 @@ from providers.serializers import ProviderDetailSerializer
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProvidersView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderModel.objects.all()
     serializer_class = ProviderListSerializer
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
     filterset_class = ProviderFilter
     pagination_class = CustomPagination
-    ordering = 'id'
-    ordering_fields = ('created',)
+    ordering = "id"
+    ordering_fields = ("created",)
 
 
 @extend_schema_view(
@@ -90,10 +93,10 @@ class ProvidersView(generics.ListCreateAPIView):
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProviderView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderModel.objects.all()
     serializer_class = ProviderDetailSerializer
-    lookup_field = 'id'
+    lookup_field = "id"

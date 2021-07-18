@@ -40,14 +40,14 @@ from products.serializers import ProviderProductSerializer
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProductsView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProductModel.objects.all()
     serializer_class = ProductsSerializer
     pagination_class = CustomPagination
-    ordering = 'id'
+    ordering = "id"
 
 
 @extend_schema_view(
@@ -89,14 +89,14 @@ class ProductsView(generics.ListCreateAPIView):
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProductView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProductModel.objects.all()
     serializer_class = ProductsSerializer
-    lookup_field = 'id'
-    lookup_url_kwarg = 'product_id'
+    lookup_field = "id"
+    lookup_url_kwarg = "product_id"
 
 
 @extend_schema_view(
@@ -118,18 +118,25 @@ class ProductView(generics.RetrieveUpdateDestroyAPIView):
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProviderProductsView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderProductModel.objects.all()
     serializer_class = ProviderProductSerializer
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    )
     filter_class = ProviderProductsFilter
-    search_fields = ('name',)
-    ordering_fields = ('name', 'created',)
+    search_fields = ("name",)
+    ordering_fields = (
+        "name",
+        "created",
+    )
     pagination_class = CustomPagination
-    ordering = 'id'
+    ordering = "id"
 
 
 @extend_schema_view(
@@ -171,11 +178,11 @@ class ProviderProductsView(generics.ListCreateAPIView):
             status.HTTP_405_METHOD_NOT_ALLOWED: MethodNotAllowedSerializer,
             status.HTTP_408_REQUEST_TIMEOUT: RequestTimeoutSerializer,
         }
-    )
+    ),
 )
 class ProviderProductView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderProductModel.objects.all()
     serializer_class = ProviderProductSerializer
-    lookup_field = 'id'
-    lookup_url_kwarg = 'provider_product_id'
+    lookup_field = "id"
+    lookup_url_kwarg = "provider_product_id"
