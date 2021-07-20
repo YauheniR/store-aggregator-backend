@@ -10,37 +10,81 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('categories', '0001_initial'),
-        ('providers', '0001_initial'),
+        ("categories", "0001_initial"),
+        ("providers", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ProductModel',
+            name="ProductModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateField(auto_now_add=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='categories.categorymodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateField(auto_now_add=True)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="categories.categorymodel",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Product',
-                'verbose_name_plural': 'Products',
+                "verbose_name": "Product",
+                "verbose_name_plural": "Products",
             },
         ),
         migrations.CreateModel(
-            name='ProviderProductModel',
+            name="ProviderProductModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('price', models.FloatField(validators=[django.core.validators.MinValueValidator(0)])),
-                ('code', models.IntegerField(validators=[django.core.validators.MinValueValidator(0)])),
-                ('created', models.DateField(auto_now_add=True)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.productmodel')),
-                ('provide', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='providers.providermodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                (
+                    "price",
+                    models.FloatField(
+                        validators=[django.core.validators.MinValueValidator(0)]
+                    ),
+                ),
+                (
+                    "code",
+                    models.IntegerField(
+                        validators=[django.core.validators.MinValueValidator(0)]
+                    ),
+                ),
+                ("created", models.DateField(auto_now_add=True)),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.productmodel",
+                    ),
+                ),
+                (
+                    "provide",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="providers.providermodel",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Provider Product',
-                'verbose_name_plural': 'Provider Products',
+                "verbose_name": "Provider Product",
+                "verbose_name_plural": "Provider Products",
             },
         ),
     ]

@@ -5,8 +5,8 @@ from products.admin import ProviderProductInstanceInLine
 
 class ProviderAdmin(admin.ModelAdmin):
     inlines = (ProviderProductInstanceInLine,)
-    list_display = ('name',)
-    list_filter = ('name',)
+    list_display = ("name",)
+    list_filter = ("name",)
 
 
 admin.site.register(ProviderModel, ProviderAdmin)

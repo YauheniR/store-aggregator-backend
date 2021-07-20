@@ -9,35 +9,63 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('providers', '0001_initial'),
+        ("providers", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CategoryModel',
+            name="CategoryModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('created', models.DateField(auto_now_add=True)),
-                ('position', models.PositiveIntegerField(default=0)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("created", models.DateField(auto_now_add=True)),
+                ("position", models.PositiveIntegerField(default=0)),
             ],
             options={
-                'verbose_name': 'Category',
-                'verbose_name_plural': 'Categories',
-                'ordering': ('position', 'name'),
+                "verbose_name": "Category",
+                "verbose_name_plural": "Categories",
+                "ordering": ("position", "name"),
             },
         ),
         migrations.CreateModel(
-            name='ProviderCategoryModel',
+            name="ProviderCategoryModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.URLField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='categories.categorymodel')),
-                ('provider', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='providers.providermodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("url", models.URLField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="categories.categorymodel",
+                    ),
+                ),
+                (
+                    "provider",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="providers.providermodel",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Provider Category',
-                'verbose_name_plural': 'Provider Categories',
+                "verbose_name": "Provider Category",
+                "verbose_name_plural": "Provider Categories",
             },
         ),
     ]

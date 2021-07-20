@@ -14,12 +14,17 @@ class ProviderCategoryInstanceInLine(admin.TabularInline):
 
 
 class ProviderCategoryAdmin(admin.ModelAdmin):
-    list_display = ('provider', 'url')
+    list_display = ("provider", "url")
 
 
 class CategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = (ProviderCategoryInstanceInLine,)
-    list_display = ('name', 'display_providers_count', 'display_products_count', 'display_button')
+    list_display = (
+        "name",
+        "display_providers_count",
+        "display_products_count",
+        "display_button",
+    )
 
     def display_providers_count(self, obj: CategoryModel) -> int:
         return ProviderCategoryModel.objects.filter(category=obj).count()
@@ -28,15 +33,25 @@ class CategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
         return ProductModel.objects.filter(category=obj).count()
 
     def display_button(self, obj: CategoryModel) -> format_html:
-        return format_html('<a class="button" href="{}?category__id__exact=%s">Button</a>' % (obj.id,),
-                           reverse('admin:%s_%s_changelist' % (
-                               ProductModel._meta.app_label, ProductModel._meta.model_name), ))
+        return format_html(
+            '<a class="button" href="{}?category__id__exact=%s">Button</a>' % (obj.id,),
+            reverse(
+                "admin:%s_%s_changelist"
+                % (
+                    ProductModel._meta.app_label,
+                    ProductModel._meta.model_name,
+                ),
+            ),
+        )
 
-    display_button.short_description = 'This Products'
+    display_button.short_description = "This Products"
     display_button.allow_tags = True
-    display_providers_count.short_description = 'Providers Count'
-    display_products_count.short_description = 'Number Products'
+    display_providers_count.short_description = "Providers Count"
+    display_products_count.short_description = "Number Products"
 
 
 admin.site.register(ProviderCategoryModel, ProviderCategoryAdmin)
-admin.site.register(CategoryModel, CategoryAdmin, )
+admin.site.register(
+    CategoryModel,
+    CategoryAdmin,
+)

@@ -1,36 +1,27 @@
 from rest_framework import serializers
 from products.models import ProductModel
 from products.models import ProviderProductModel
-from providers.models import ProviderModel
+from products.tasks import find_id_from_provider_product
 
 
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductModel
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ProviderProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProviderProductModel
-        fields = '__all__'
-
-    def validate(self, attrs: dict) -> dict:
-        if ProductModel.objects.filter(id=attrs['product']).exists():
-            raise serializers.ValidationError('такого product не существует!')
-        return attrs
+        fields = "__all__"
 
 
 class ProviderProductSerializer(serializers.ModelSerializer):
+    def create(self, validated_data: dict) -> ProviderProductModel:
+        instance = super().create(validated_data)
+        find_id_from_provider_product.delay(instance.id)
+        return instance
+
     class Meta:
         model = ProviderProductModel
-        fields = '__all__'
-
-    def validate(self, attrs: dict) -> dict:
-        if not ProductModel.objects.filter(id=attrs['product'].id).exists():
-            raise serializers.ValidationError('такого product не существует!')
-
-        if not ProviderModel.objects.filter(id=attrs['provide'].id).exists():
-            raise serializers.ValidationError('такого provider не существует!')
-
-        return attrs
+        fields = "__all__"
