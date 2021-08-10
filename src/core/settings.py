@@ -17,7 +17,7 @@ env = environ.Env(
     DEBUG=(bool, False),
 )
 environ.Env.read_env(
-    env_file=os.path.join(os.path.join(root.root, "src/" ".env.example"))
+    env_file=os.path.join(os.path.join(root.root, ".env"))
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
