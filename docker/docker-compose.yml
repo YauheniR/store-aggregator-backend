@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: "postgres"
+    volumes:
+      - /data/postgresql:/var/lib/postgresql/data
+    env_file:
+      - ../.env
+    ports:
+      - "5432:5432"
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  products_tasks_queue:
+    build: ../
+    container_name: "products_tasks"
+    working_dir: /app/src
+    env_file: ../.env
+    command: "celery -A core worker -l info -Q products_tasks"
+    volumes:
+      - ../src:/app/src
+    depends_on:
+      - rabbitmq
+
+  categories_tasks_queue:
+    build: ../
+    container_name: "categories_tasks"
+    working_dir: /app/src
+    env_file: ../.env
+    command: "celery -A core worker -l info -Q categories_tasks"
+    volumes:
+      - ../src:/app/src
+    depends_on:
+      - rabbitmq
+
+  django:
+    build: ../
+    container_name: "django"
+    env_file:
+      - ../.env
+    working_dir: /app/src/
+    volumes:
+      - ../:/app
+    entrypoint:
+      - /app/docker/backend/wait_for_postgres.sh
+      - /app/docker/backend/entrypoint.sh
+    ports:
+      - "8070:8070"
+    depends_on:
+      - postgres
