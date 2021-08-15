@@ -17,7 +17,7 @@ env = environ.Env(
     DEBUG=(bool, False),
 )
 environ.Env.read_env(
-    env_file=os.path.join(os.path.join(root.root, "docker", ".env"))
+    env_file=os.path.join(os.path.join(root.root, ".env"))
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,7 +34,7 @@ DEBUG = env("DEBUG")
 ADMIN_USER_NAME = env("ADMIN_USER_NAME")
 ADMIN_USER_PASSWORD = env("ADMIN_USER_PASSWORD")
 
-ALLOWED_HOSTS = [env("PROJECT_HOST")]
+ALLOWED_HOSTS = env("PROJECT_HOST").split(",")
 
 # Application definition
 
@@ -166,4 +166,8 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CELERY_BROKER_URL = env("BROKER_URL")
+CELERY_BROKER_HOST = env("BROKER_HOST")
+CELERY_BROKER_PORT = env("BROKER_PORT")
+CELERY_BROKER_VHOST = env("BROKER_VHOST")
+CELERY_BROKER_USER = env("BROKER_USER")
+CELERY_BROKER_PASSWORD = env("BROKER_PASSWORD")

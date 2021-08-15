@@ -6,46 +6,49 @@ services:
     container_name: "postgres"
     volumes:
       - /../data/postgresql:/var/lib/postgresql/data
-    env_file: .env
+    env_file: ../.env
     restart: always
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: "rabbitmq"
+    env_file: ../.env
     restart: always
 
   products_tasks_queue:
     build: backend
     container_name: "products_tasks"
-    working_dir: ${COMPOSE_PROJECT_DIR}/src
-    env_file: .env
-    command: "celery -A core worker -l info -Q products_tasks"
+    working_dir: ${COMPOSE_PROJECT_DIR}/src/
+    env_file: ../.env
+    entrypoint:
+      - ${COMPOSE_SH_DIR}/products_tasks/run_products_worker.sh
     volumes:
-      - ../src:${COMPOSE_PROJECT_DIR}/src
+      - ../:${COMPOSE_PROJECT_DIR}
     depends_on:
       - rabbitmq
 
   categories_tasks_queue:
     build: backend
     container_name: "categories_tasks"
-    working_dir: ${COMPOSE_PROJECT_DIR}/src
-    env_file: .env
-    command: "celery -A core worker -l info -Q categories_tasks"
+    working_dir: ${COMPOSE_PROJECT_DIR}/src/
+    env_file: ../.env
+    entrypoint:
+      - ${COMPOSE_SH_DIR}/categories_tasks/run_categories_worker.sh
     volumes:
-      - ../src:${COMPOSE_PROJECT_DIR}/src
+      - ../:${COMPOSE_PROJECT_DIR}
     depends_on:
       - rabbitmq
 
   django:
     build: backend
     container_name: "django"
-    env_file: .env
+    env_file: ../.env
     working_dir: ${COMPOSE_PROJECT_DIR}/src/
     volumes:
       - ../:${COMPOSE_PROJECT_DIR}
     entrypoint:
-      - ${COMPOSE_PROJECT_DIR}/docker/backend/wait_for_postgres.sh
-      - ${COMPOSE_PROJECT_DIR}/docker/backend/entrypoint.sh
+      - ${COMPOSE_SH_DIR}/wait_for_postgres.sh
+      - ${COMPOSE_SH_DIR}/entrypoint.sh
     ports:
       - "8070:8070"
     depends_on:
