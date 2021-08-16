@@ -1,4 +1,5 @@
 #!/bin/bash
-python manage.py makemigrations
 python manage.py migrate
-python manage.py runserver 0.0.0.0:8070
+python manage.py collectstatic --noinput
+uwsgi --http :8001 --module core.wsgi
+exec "$@"

@@ -1,25 +1,41 @@
 version: "3.9"
 
 services:
+  nginx:
+    image: nginx:1.15
+    container_name: "nginx"
+    restart: always
+    volumes:
+      - ../volumes/logs:/var/log/nginx
+      - ../src/static:/var/backend/static
+      - ../src/media:/var/backend/media
+      - ./nginx/dev.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/uwsgi_params:/etc/nginx/conf.d/uwsgi_params
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - django
+
   postgres:
     image: postgres:latest
     container_name: "postgres"
     volumes:
       - /../data/postgresql:/var/lib/postgresql/data
-    env_file: ../.env
+    env_file: ../src/.env
     restart: always
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: "rabbitmq"
-    env_file: ../.env
+    env_file: ../src/.env
     restart: always
 
   products_tasks_queue:
     build: backend
     container_name: "products_tasks"
     working_dir: ${COMPOSE_PROJECT_DIR}/src/
-    env_file: ../.env
+    env_file: ../src/.env
     entrypoint:
       - ${COMPOSE_SH_DIR}/products_tasks/run_products_worker.sh
     volumes:
@@ -31,7 +47,7 @@ services:
     build: backend
     container_name: "categories_tasks"
     working_dir: ${COMPOSE_PROJECT_DIR}/src/
-    env_file: ../.env
+    env_file: ../src/.env
     entrypoint:
       - ${COMPOSE_SH_DIR}/categories_tasks/run_categories_worker.sh
     volumes:
@@ -42,14 +58,14 @@ services:
   django:
     build: backend
     container_name: "django"
-    env_file: ../.env
+    env_file: ../src/.env
     working_dir: ${COMPOSE_PROJECT_DIR}/src/
     volumes:
       - ../:${COMPOSE_PROJECT_DIR}
     entrypoint:
       - ${COMPOSE_SH_DIR}/wait_for_postgres.sh
       - ${COMPOSE_SH_DIR}/entrypoint.sh
-    ports:
-      - "8070:8070"
+    expose:
+      - 8001
     depends_on:
       - postgres
