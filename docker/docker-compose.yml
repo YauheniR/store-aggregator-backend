@@ -66,6 +66,6 @@ services:
       - ${COMPOSE_SH_DIR}/wait_for_postgres.sh
       - ${COMPOSE_SH_DIR}/entrypoint.sh
     expose:
-      - 8001
+      - "8001"
     depends_on:
       - postgres

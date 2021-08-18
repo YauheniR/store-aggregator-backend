@@ -12,12 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import environ
 
-root = environ.Path(__file__) - 3
+root = environ.Path(__file__) - 2
 env = environ.Env(
     DEBUG=(bool, False),
 )
 environ.Env.read_env(
-    env_file=os.path.join(os.path.join(root.root, "src", ".env"))
+    env_file=os.path.join(root.root, ".env")
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
