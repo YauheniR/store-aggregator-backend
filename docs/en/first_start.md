@@ -6,37 +6,25 @@ You can run the **store-aggregator-backend** project locally using **Pipenv**.
 
 ### Dependencies
 
-* [pip3](https://github.com/pypa/pip)
-* [Pipenv](https://pypi.org/project/pipenv/)
 * [Python 3.7.4](https://www.ics.uci.edu/~pattis/common/handouts/pythoneclipsejava/python.html)
+* [Docker](https://docs.docker.com/engine/install/)
+* [Docker-Compose](https://docs.docker.com/composer/install/)
 
 ### Installation
 
-First of all, installed [Pipenv](https://pypi.org/project/pipenv/),then run the commands:
+First of all, install [Docker](https://docs.docker.com/engine/install/) and [Docker-Compose](https://docs.docker.com/composer/install/)
 
-     pip install pipenv
-     
-Go in the [backend](../..) folder and activate the environment:
+The next step is to configure the environment variables.
+You can read how to configure the environment variables file in the [Environment Variables](enviroment.md)
 
-    pipenv shell
+After everything has been configured, you can run the project locally or deploy it in docker containers.
 
-Make sure that the environment has been created and activated.
+To run the project locally in [root](../..) for the project, run the command:
 
-Next, you need to install all the necessary packages for the application.
+    make run_local
 
-    pipenv install
-    
-The next step is to configure our local environment variables. 
-You can read how to configure the environment variable file in the section [Environment variables](enviroment.md)
+Now open the project in [browser](http://localhost:8000).
 
-After everything has been configured, you can start the project. The first thing you need to do is perform migrations
-to set up a database:
+To run all project services in docker containers in [root](../..) for the project, run the command:
 
-    python manage.py migrate
-
-After all the above has been done, you can run project. To do this, run the command below,
-it will allow you to run the project:
-
-    python manage.py runserver
-
-Now open the project in the [browser](http://localhost:8000).
+    make run_docker
