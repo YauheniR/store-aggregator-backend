@@ -2,8 +2,8 @@ FROM python:3.7
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR app/
-COPY . /app/
+COPY Pipfile ./
+COPY Pipfile.lock ./
 
 RUN apt-get update && \
     apt-get install -y postgresql-client && \

@@ -12,12 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import environ
 
-root = environ.Path(__file__) - 3
+root = environ.Path(__file__) - 2
 env = environ.Env(
     DEBUG=(bool, False),
 )
 environ.Env.read_env(
-    env_file=os.path.join(os.path.join(root.root, ".env"))
+    env_file=os.path.join(root.root, ".env")
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,7 +34,7 @@ DEBUG = env("DEBUG")
 ADMIN_USER_NAME = env("ADMIN_USER_NAME")
 ADMIN_USER_PASSWORD = env("ADMIN_USER_PASSWORD")
 
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "postgres",]
+ALLOWED_HOSTS = env("PROJECT_HOST").split(",")
 
 # Application definition
 
@@ -159,11 +159,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CELERY_BROKER_URL = env("BROKER_URL")
+CELERY_BROKER_HOST = env("BROKER_HOST")
+CELERY_BROKER_PORT = env("BROKER_PORT")
+CELERY_BROKER_VHOST = env("BROKER_VHOST")
+CELERY_BROKER_USER = env("BROKER_USER")
+CELERY_BROKER_PASSWORD = env("BROKER_PASSWORD")
